@@ -1,0 +1,23 @@
+<div class="user-table-container">
+  <h2>User List</h2>
+  <table class="user-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Roles</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.username }}</td>
+        <td>
+          <span *ngFor="let role of user.roles; let last = last">
+            {{ role.name }}<span *ngIf="!last">, </span>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
