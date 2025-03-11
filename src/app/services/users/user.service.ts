@@ -26,6 +26,78 @@ export class UserService {
     {
       id: 3,
       username: "carlos",
+
+      roles: [
+        { id: 3, name: "ROLE_USER" }
+      ]
+    },
+    {
+      id: 3,
+      username: "carlos",
+
+      roles: [
+        { id: 3, name: "ROLE_USER" }
+      ]
+    }
+    ,
+    {
+      id: 3,
+      username: "carlos",
+
+      roles: [
+        { id: 3, name: "ROLE_USER" }
+      ]
+    }
+    ,
+    {
+      id: 3,
+      username: "carlos",
+
+      roles: [
+        { id: 3, name: "ROLE_USER" }
+      ]
+    }
+    ,
+    {
+      id: 3,
+      username: "carlos",
+
+      roles: [
+        { id: 3, name: "ROLE_USER" }
+      ]
+    }
+    ,
+    {
+      id: 3,
+      username: "carlos",
+
+      roles: [
+        { id: 3, name: "ROLE_USER" }
+      ]
+    }
+    ,
+    {
+      id: 3,
+      username: "carlos",
+
+      roles: [
+        { id: 3, name: "ROLE_USER" }
+      ]
+    }
+    ,
+    {
+      id: 3,
+      username: "carlos",
+
+      roles: [
+        { id: 3, name: "ROLE_USER" }
+      ]
+    }
+    ,
+    {
+      id: 3,
+      username: "carlos",
+
       roles: [
         { id: 3, name: "ROLE_USER" }
       ]

@@ -14,7 +14,7 @@ import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 export class UserComponent implements OnInit{
 
   users : User[] = [];
-
+  userToDelete: number | null = null;
   constructor(private service: UserService){
 
   }
@@ -22,5 +22,22 @@ export class UserComponent implements OnInit{
   ngOnInit(): void {
     this.service.findAll().subscribe(users=>this.users = users);
    }
+
+   
+  confirmDelete(userId: number) {
+    this.userToDelete = userId;
+  }
+
+  deleteUser() {
+    if (this.userToDelete !== null) {
+      console.log(`User with ID ${this.userToDelete} deleted.`);
+      this.users = this.users.filter(user => user.id !== this.userToDelete);
+      this.userToDelete = null;
+    }
+  }
+
+  cancelDelete() {
+    this.userToDelete = null;
+  }
 
 }

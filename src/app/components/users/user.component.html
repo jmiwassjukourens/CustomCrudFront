@@ -7,6 +7,7 @@
         <th>Username</th>
         <th>Roles</th>
         <th>Edit</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -19,11 +20,25 @@
           </span>
         </td>
         <td>
-          <button class="edit-button">
+          <!-- Botón de editar con routerLink -->
+          <button class="edit-button" [routerLink]="['/edit', user.id]">
             <span class="material-icons">edit</span>
+          </button>
+        </td>
+        <td>
+          <!-- Botón de eliminar -->
+          <button class="delete-button" (click)="confirmDelete(user.id)">
+            <span class="material-icons">delete</span>
           </button>
         </td>
       </tr>
     </tbody>
   </table>
+
+  <!-- Mensaje de confirmación de eliminación -->
+  <div *ngIf="userToDelete !== null" class="delete-confirmation">
+    <p>Are you sure? The user will be deleted permanently.</p>
+    <button (click)="deleteUser()">Yes, Delete</button>
+    <button (click)="cancelDelete()">Cancel</button>
+  </div>
 </div>

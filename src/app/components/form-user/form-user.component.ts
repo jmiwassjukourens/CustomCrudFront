@@ -1,18 +1,20 @@
-import { CommonModule, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule, NgIf, NgStyle } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-form-user',
-  imports: [FormsModule, CommonModule, NgIf,ReactiveFormsModule],
   templateUrl: './form-user.component.html',
-  styleUrl: './form-user.component.css'
+  imports: [FormsModule, CommonModule, NgIf,ReactiveFormsModule],
+  styleUrls: ['./form-user.component.css']
 })
-export class FormUserComponent {
+export class FormUserComponent implements OnInit {
   userForm: FormGroup;
   successMessage: string = '';
+  isEditMode: boolean = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute) {
     this.userForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(7)]],
       roles: this.fb.group({
@@ -22,27 +24,26 @@ export class FormUserComponent {
     });
   }
 
+  ngOnInit() {
+    // Verifica si existe un parámetro `id` en la ruta
+    const id = this.route.snapshot.paramMap.get('id');
+    this.isEditMode = !!id; // Será `true` si hay un ID en la URL
+
+    if (this.isEditMode) {
+      this.userForm.removeControl('password');
+    } else {
+      this.userForm.addControl('password', this.fb.control('', [
+        Validators.required, 
+        Validators.minLength(7), 
+        Validators.maxLength(15),
+        Validators.pattern('(?=.*[!@#$%^&*])')
+      ]));
+    }
+  }
+
   submit() {
     if (this.userForm.valid) {
-      const formValues = this.userForm.value;
-      const selectedRoles = [];
-      if (formValues.roles.admin) selectedRoles.push('ROLE_ADMIN');
-      if (formValues.roles.user) selectedRoles.push('ROLE_USER');
-
-      const user = {
-        username: formValues.username,
-        roles: selectedRoles
-      };
-
-      this.successMessage = `User ${user.username} was successfully created`;
-
-      console.log('User created:', user);
-
-      // Clear form after 3 seconds
-      setTimeout(() => {
-        this.successMessage = '';
-        this.userForm.reset();
-      }, 3000);
+      console.log(this.isEditMode ? 'Updating user...' : 'Creating user...', this.userForm.value);
     } else {
       console.log('Invalid form');
     }
