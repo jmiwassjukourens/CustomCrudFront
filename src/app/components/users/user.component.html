@@ -6,6 +6,7 @@
         <th>ID</th>
         <th>Username</th>
         <th>Roles</th>
+        <th>Edit</th>
       </tr>
     </thead>
     <tbody>
@@ -16,6 +17,11 @@
           <span *ngFor="let role of user.roles; let last = last">
             {{ role.name }}<span *ngIf="!last">, </span>
           </span>
+        </td>
+        <td>
+          <button class="edit-button">
+            <span class="material-icons">edit</span>
+          </button>
         </td>
       </tr>
     </tbody>

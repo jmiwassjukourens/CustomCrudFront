@@ -1,12 +1,12 @@
 .user-table-container {
-  max-width: 600px;
-  margin: 20px auto;
+  max-width: 100vh;
+  margin: 4vh auto;
   font-family: Arial, sans-serif;
   text-align: center;
 }
 
 .user-table-container h2 {
-  margin-bottom: 10px;
+  margin-bottom: 2vh;
   color: #333;
 }
 
@@ -19,7 +19,7 @@
 
 .user-table th, .user-table td {
   border: 1px solid #ddd;
-  padding: 10px;
+  padding: 2vh;
 }
 
 .user-table th {
@@ -33,4 +33,25 @@
 
 .user-table tbody tr:hover {
   background: #ddd;
+}
+.edit-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 1vh 1vh;
+  border-radius: 0.5vh;
+  cursor: pointer;
+  display: flex;
+  margin-left: 4vh;
+  align-items: center;
+  font-size: 3vh;
+  transition: background 0.3s ease;
+}
+
+.edit-button i, .edit-button .material-icons {
+  font-size: 3vh;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
 }

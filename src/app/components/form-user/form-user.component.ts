@@ -14,7 +14,7 @@ export class FormUserComponent {
 
   constructor(private fb: FormBuilder) {
     this.userForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(3)]],
+      username: ['', [Validators.required, Validators.minLength(7)]],
       roles: this.fb.group({
         admin: [false],
         user: [false]
