@@ -13,9 +13,7 @@ export class AppComponent {
   title = 'CustomCrudFront';
   isMenuActive = false;
   isDesktop: boolean = window.innerWidth > 768;
-  showParagraph = this.isDesktop;
-  showLogo = this.isDesktop;
-  putbr = this.isDesktop;
+
 
   toggleMenu() {
     this.isMenuActive = !this.isMenuActive;
@@ -27,14 +25,7 @@ export class AppComponent {
 
     if (screenWidth > 768) {
       this.isMenuActive = false;
-      this.showParagraph = true;
-      this.showLogo = true;
-      this.putbr = true;
-    } else {
-      this.showParagraph = false;
-      this.showLogo = false;
-      this.putbr = false;
-    }
+    } 
   }
 
   expandedIndex: number | null = null;

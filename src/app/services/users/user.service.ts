@@ -1,114 +1,38 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../models/user';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private users: User[] = [
-    {
-      id: 1,
-      username: "juanmartin",
-      roles: [
-        { id: 1, name: "ROLE_ADMIN" },
-        { id: 2, name: "ROLE_USER" }
-      ]
-    },
-    {
-      id: 2,
-      username: "sofia",
-      roles: [
-        { id: 2, name: "ROLE_USER" }
-      ]
-    },
-    {
-      id: 3,
-      username: "carlos",
+  private urlBackend = 'http://localhost:8080/users'
 
-      roles: [
-        { id: 3, name: "ROLE_USER" }
-      ]
-    },
-    {
-      id: 3,
-      username: "carlos",
+  constructor(private http: HttpClient) { 
 
-      roles: [
-        { id: 3, name: "ROLE_USER" }
-      ]
-    }
-    ,
-    {
-      id: 3,
-      username: "carlos",
-
-      roles: [
-        { id: 3, name: "ROLE_USER" }
-      ]
-    }
-    ,
-    {
-      id: 3,
-      username: "carlos",
-
-      roles: [
-        { id: 3, name: "ROLE_USER" }
-      ]
-    }
-    ,
-    {
-      id: 3,
-      username: "carlos",
-
-      roles: [
-        { id: 3, name: "ROLE_USER" }
-      ]
-    }
-    ,
-    {
-      id: 3,
-      username: "carlos",
-
-      roles: [
-        { id: 3, name: "ROLE_USER" }
-      ]
-    }
-    ,
-    {
-      id: 3,
-      username: "carlos",
-
-      roles: [
-        { id: 3, name: "ROLE_USER" }
-      ]
-    }
-    ,
-    {
-      id: 3,
-      username: "carlos",
-
-      roles: [
-        { id: 3, name: "ROLE_USER" }
-      ]
-    }
-    ,
-    {
-      id: 3,
-      username: "carlos",
-
-      roles: [
-        { id: 3, name: "ROLE_USER" }
-      ]
-    }
-    
-  ];
-
-  constructor() { }
-
-  findAll(): Observable<User[]>{
-    return of(this.users);
   }
-  
+
+  findAll(): Observable<User[]> {
+    return this.http.get(this.urlBackend).pipe(
+      map((response: any) => response as User[])
+    );
+  }
+  deleteById(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.urlBackend}/${id}`);
+  }
+
+
+  create(user: User): Observable<User> {
+    return this.http.post<User>(this.urlBackend, user).pipe(
+      map((response: any) => response as User)
+    );
+  }
+
+  update(user: User): Observable<User> {
+    return this.http.put<User>(`${this.urlBackend}/${user.id}`, user).pipe(
+      map((response: any) => response as User)
+    );
+  }
 }

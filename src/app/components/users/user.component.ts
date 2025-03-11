@@ -30,11 +30,19 @@ export class UserComponent implements OnInit{
 
   deleteUser() {
     if (this.userToDelete !== null) {
-      console.log(`User with ID ${this.userToDelete} deleted.`);
-      this.users = this.users.filter(user => user.id !== this.userToDelete);
-      this.userToDelete = null;
+      this.service.deleteById(this.userToDelete).subscribe({
+        next: () => {
+          console.log(`User with ID ${this.userToDelete} deleted.`);
+          this.users = this.users.filter(user => user.id !== this.userToDelete);
+          this.userToDelete = null;
+        },
+        error: (error) => {
+          console.error('Error deleting user: ', error);
+        }
+      });
     }
   }
+  
 
   cancelDelete() {
     this.userToDelete = null;
