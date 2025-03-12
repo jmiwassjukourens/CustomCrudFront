@@ -13,36 +13,30 @@
   <main>
    
     <div class="container-header">
-      
       <div class="logo">
         <a href="/">
           <img id="logo" class="logo_img" src="/logo.png" alt="Logo">
         </a>
       </div>
-      <header >
-     
-        
-      
+      <header>
         <!-- Botón para abrir/cerrar menú -->
         <div class="menu-toggle" (click)="toggleMenu()">
-          
           <span class="span_nav" *ngIf="!isMenuActive">☰</span>
           <span class="span_nav" *ngIf="isMenuActive">✖</span>
         </div>
-         <!-- Menú de navegación -->
-       
-         <nav id="menu" [ngClass]="{ 'active': isMenuActive }">
+        <!-- Menú de navegación -->
+        <nav id="menu" [ngClass]="{ 'active': isMenuActive }">
           <ul class="un-header">
+            <!-- Solo se muestra si el usuario NO está autenticado -->
+            <li *ngIf="!isLoggedIn"><a routerLink="/login">Log In</a></li>
             <li><a routerLink="/users">Users</a></li>
             <li><a routerLink="/create">Create</a></li>
-
           </ul>
         </nav>
-        
- 
       </header>
     </div>
     <router-outlet></router-outlet>
+    
  
   </main>
   
